@@ -1,0 +1,41 @@
+#:import utils kivy.utils
+
+GlobalLayout:
+
+<BackgroundColor@Widget>:
+	background_color: 1, 1, 1, 1
+	canvas.before:
+		Color:
+			rgba: root.background_color
+		Rectangle:
+			size: self.size
+			pos: self.pos
+
+<FileBrowser>:
+	id: file_browser
+	path: "."
+	on_selection: self.selected(file_browser.selection)
+
+<NoteWindow>:
+	id: note_window
+	orientation: "vertical"
+	BackgroundLabel:
+		text: "title bar"
+		background_color: utils.get_color_from_hex('#282a36')
+		size_hint: 1, None
+		height: "30dp"
+	BackgroundLabel:
+		id: note_text_in_window
+		text: root.note_text
+		background_color: utils.get_color_from_hex('#44475a')
+
+<GlobalLayout>:
+	orientation: "horizontal"
+	FileBrowser:
+		size_hint: 0.2, 1
+	NoteWindow:
+		size_hint: 0.8, 1
+
+<BackgroundLabel@Label+BackgroundColor>:
+	background_color: 0, 0, 0, 0
+
